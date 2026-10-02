@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CareNotes.Api/CareNotes.Api.csproj" />
+    <Project Path="src/CareNotes.Application/CareNotes.Application.csproj" />
+    <Project Path="src/CareNotes.Domain/CareNotes.Domain.csproj" />
+    <Project Path="src/CareNotes.Infrastructure/CareNotes.Infrastructure.csproj" />
+  </Folder>
+</Solution>
