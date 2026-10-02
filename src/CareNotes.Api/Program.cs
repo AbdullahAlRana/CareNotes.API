@@ -9,6 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 var jwt = builder.Configuration.GetSection("Jwt");
 
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 if (string.IsNullOrEmpty(jwt["Key"]))
 {
     if (!builder.Environment.IsDevelopment())
@@ -52,5 +56,7 @@ app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapGet("/", () => Results.Ok(new { service = "CareNotes.API", status = "ok" }));
+app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 
 app.Run();

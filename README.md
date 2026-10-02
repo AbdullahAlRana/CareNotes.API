@@ -29,6 +29,20 @@ API base URL: `http://localhost:5177/api`
 - In Development, an admin is seeded from `appsettings.Development.json`: `admin@carenotes.local` / `Admin@12345`.
 - In Development, a random JWT signing key is generated at startup if `Jwt:Key` is empty, so tokens are invalidated on restart. Outside Development, `Jwt:Key` must be set (for example via an environment variable `Jwt__Key`).
 
+## Deploy (Docker)
+
+The `Dockerfile` at the repo root builds a production image. The app listens on `$PORT` when set (as Render does), otherwise on 8080. `GET /health` is a lightweight check for uptime monitors.
+
+Required environment variables:
+
+| Variable | Example |
+|---|---|
+| `Mongo__ConnectionString` | `mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority` |
+| `Mongo__Database` | `carenotes` |
+| `Jwt__Key` | 48+ random characters |
+| `Cors__Origins__0` | `https://your-frontend.vercel.app` |
+| `Seed__AdminEmail` / `Seed__AdminPassword` | Optional: seeds the first admin on startup |
+
 ## Roles
 
 - **User**: create, update, delete and list their own notes; write posts; manage their own profile and interests.
